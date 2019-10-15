@@ -1,0 +1,72 @@
+<!DOCTYPE>
+<html>
+<head>
+<title> Easter Sunday </title>
+</head>
+<body>
+
+    <p> Please input the year you would like to find the date of easter Sunday for </p>
+    <input id = "years">
+    <button type = "button" onclick="easterSunday()"> submit </button>
+    <p id="demo"></p>
+
+
+<script>
+// var year = prompt("Please enter year to find out date of easter sunday");
+
+function easterSunday() {
+  var year = document.getElementById("years").value;
+   var c = Math.floor(year / 100);
+   var n = year - 19 * (Math.floor(year/19));
+   var k = Math.floor((c - 17)/25);
+   var i = c - Math.floor((c/4)) - Math.floor((c-k)/3) + (19 * n) + 15;
+   i = i - 30 * Math.floor((i/30));
+   i = i - Math.floor((i/28)) * (1 - Math.floor((i/28)) * Math.floor((29/(i+1))) * Math.floor(((21 - n)/11)));
+   var j = year + Math.floor((year/4)) + i + 2 - c + Math.floor((c/4));
+   j = j - 7 * Math.floor((j/7));
+   var p = i - j;
+   var month = 3 + Math.floor((p + 40)/44);
+   var day = p + 28 - 31 * Math.floor((month/4));
+   var returnValue =  day + dayEnd(day) + " " + endMonth(month) + " " + year;
+   document.getElementById("demo").innerHTML = returnValue;
+ }
+
+ function endMonth (month) {
+   var monthString = "Something gone wrong";
+   switch (month) {
+    case 3:
+      monthString = "March";
+      break;
+    case 4:
+      monthString = "April";
+      break;
+   }
+   return monthString
+ }
+
+ function dayEnd (day) {
+   var endString = " "
+   if (!(day < 20 && day > 10)) {
+     var endNumber = parseInt(day.toString().split('').pop())
+     console.log(endNumber);
+     if (endNumber <= 3) {
+       if (endNumber == 1) {
+         endString = "st";
+      } else if (endNumber == 2) {
+        endString = "nd";
+      } else if (endNumber == 3) {
+        endString = "rd";
+      }
+   } else {
+     endString = "th"
+   }
+ } else {
+   endString = "th";
+ }
+ return endString
+}
+
+
+</script>
+</body>
+</html>
