@@ -2,16 +2,16 @@ import java.lang.*;
 import java.util.Scanner;
 public class passGen {
   public static void main(String[] args) {
-    System.out.println(password(5, 12));
+    System.out.println(password(9, 15));
   }
   public static String password(int mLength, int lLength) {
     int length = (int)(Math.random() * ((mLength - lLength) + 1)) + lLength;
     String password = passwordGen(length);
-    boolean checked = check(password, false, true, true, true);
+    boolean checked = check(password, false, true, true, true, "Hf23");
     while(!checked) {
       System.out.println(password);
       password = passwordGen(length);
-      checked = check(password, false, true, true, true);
+      checked = check(password, false, true, true, true, "Hf23");
     }
     return password;
   }
@@ -29,11 +29,13 @@ public class passGen {
     }
     return password;
   }
-  public static boolean check(String password, boolean l, boolean u, boolean s, boolean n) {
+  public static boolean check(String password, boolean l, boolean u, boolean s, boolean n, String p) {
     //lowercase
     //uppercase
     //number
     //special characters
+    boolean t = false;
+    t = list(password, p);
     if (l) {
       l = lower(password);
     } else {
@@ -54,7 +56,7 @@ public class passGen {
     } else {
       n =true;
     }
-    return l && u && s && n;
+    return l && u && s && n && t;
 
   }
   public static boolean upper(String password) {
@@ -92,5 +94,28 @@ public class passGen {
       }
     }
     return false;
+  }
+  public static boolean list(String password, String characters) {
+    for(int i = 0; i < password.length(); i++) {
+      char ex = password.charAt(i);
+
+    for(int j = 0; j < characters.length(); j++) {
+      if (ex == characters.charAt(j)) {
+        String newL = "";
+        for(int k = 0; k < characters.length(); k++) {
+          if(k != ex) {
+            newL += k;
+          }
+        }
+        characters = newL;
+      }
+    }
+  }
+  if (characters == "") {
+    return true;
+  } else {
+    return false;
+  }
+
   }
 }
