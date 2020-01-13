@@ -1,0 +1,102 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title> Password Generator </title>
+</head>
+<body>
+<script>
+  function password (sLength, lLength) {
+    var = Math.floor(Math.random() * lLength) + sLength;
+    var = passwordGen(length);
+    var = check(password, false, true, true, true, "H");
+    while(!checked) {
+      password = passwordGen(length);
+      checked = check(password, false, true, true, true, "H");
+    }
+    return password;
+  }
+  function gen() {
+    var max = 94;
+    var min = 1;
+    var random = Math.floor(Math.random() * max) + min;
+    var con = random + 32;
+    return String.fromCharCode(con);
+  }
+  function passwordGen (maxLen) {
+    var password = "";
+    for (i = 0; i < maxLen; i++){
+      password += gen();
+    }
+    return password;
+
+  }
+  function check(password, l, u, s, n, p) {
+    var t = false;
+    t = list(passwrod, p);
+    if(l) {
+      l = lower(password);
+    } else {
+      l = true;
+    }
+    if(u) {
+      u = upper(password);
+    } else {
+      u = true;
+    }
+    if (s) {
+      s = symbol(password);
+    } else {
+      s = true;
+    }
+    if (n) {
+      n = digit(password);
+    } else {
+      n = true;
+    }
+    return l && u && s && n && t;
+  }
+  function digit(password) {
+    for (i = 0; i < password.length; i++) {
+      if (!isNaN(password[i])) {
+        return true
+      }
+    }
+    return false;
+  }
+  function upper(password) {
+    for(i = 0; i < password.length; i++) {
+      if(password[i].toUpperCase() == password[i]) {
+        return true;
+      }
+    }
+    return false;
+  }
+  function lower(password) {
+    for(i = 0; i < password.length; i++) {
+      if(password[i].toLowerCase() == password[i]) {
+        return true;
+      }
+    }
+    retun false;
+  }
+  function symbol(password) {
+    for (i = 0; i < password.length; i++) {
+      if(isNaN(password[i]) && password[i].toLowerCase() != password[i] && password[i].toUpperCase() != password[i]) {
+        return true;
+      }
+    }
+    return false;
+  }
+  function list (password, characters) {
+    for (i = 0; i < password.length; i++) {
+      for (j = 0; j < characters.length; j++) {
+        if(password[i] == characters[j]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+</script>
+</body>
+</html>
